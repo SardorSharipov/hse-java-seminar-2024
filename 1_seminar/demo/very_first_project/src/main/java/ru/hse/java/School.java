@@ -2,27 +2,18 @@ package ru.hse.java;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 public class School {
-    private static final Pattern NAME_MASK = Pattern.compile("[А-Яа-я ]+");
-    static boolean nameIsValid(String name) {
-        return NAME_MASK.matcher(name).matches();
-    }
-    // fie
     private String name;
-    private List<String> students;
+    private List<Student> students;
 
     public School(String name) {
         this(name, List.of());
     }
 
-    public School(String name, List<String> students) {
+    public School(String name, List<Student> students) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(students);
-        if (students.stream().anyMatch(a -> !School.nameIsValid(a))) {
-            throw new IllegalArgumentException(students + " has not valid by " + NAME_MASK + " pattern.");
-        }
         this.name = name;
         this.students = students;
     }
@@ -36,11 +27,11 @@ public class School {
         this.name = name;
     }
 
-    public List<String> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<String> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 

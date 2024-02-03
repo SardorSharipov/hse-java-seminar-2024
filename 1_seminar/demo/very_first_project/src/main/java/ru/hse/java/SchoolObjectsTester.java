@@ -1,13 +1,16 @@
 package ru.hse.java;
 
+import java.time.ZonedDateTime;
 import java.util.*;
 
 public class SchoolObjectsTester {
     private static final Set<School> EXAMPLE = new HashSet<>(Set.of(
-            new School("HSE", List.of("Группа первая")),
-            new School("HSE", List.of("Группа вторая")),
-            new School("HSE", List.of("С")),
-            new School("HSE", List.of("К"))));
+            new School("HSE", List.of(new Student("Группа первая", ZonedDateTime.now()))),
+            new School("HSE", List.of(new Student("Группа вторая", ZonedDateTime.now()))),
+            new School("HSE", List.of(new Student("С", ZonedDateTime.now()))),
+            new School("HSE", List.of(new Student("К", ZonedDateTime.now())))
+    ));
+
     private static Set<School> schools = new HashSet<>();
     private Set<School> schools2 = new HashSet<>();
 
@@ -33,7 +36,7 @@ public class SchoolObjectsTester {
             }
         });
         try {
-            var school1 = new School("HSE", List.of("Группа"));
+            var school1 = new School("HSE", List.of(new Student("Группа", ZonedDateTime.now())));
             System.out.println("Our school: " + school1);
         } catch (NullPointerException iae) {
             iae.printStackTrace();
